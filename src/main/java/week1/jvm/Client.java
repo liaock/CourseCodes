@@ -17,7 +17,7 @@ public class Client {
         URLDecoder decoder = new URLDecoder();
         String path = decoder.decode(url.getPath(),"utf-8");
         CustomizedClassLoader loader = new CustomizedClassLoader(path);
-        Class<?> clazz = loader.findClass("Hello");
+        Class<?> clazz = loader.loadClass("Hello");
         Object obj = clazz.newInstance();
         Method method = clazz.getDeclaredMethod("hello");
         method.invoke(obj);
