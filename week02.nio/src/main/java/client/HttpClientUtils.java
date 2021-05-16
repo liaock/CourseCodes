@@ -33,9 +33,6 @@ public class HttpClientUtils {
 
     private static PoolingHttpClientConnectionManager poolConnManager = null;
 
-    /**
-     * 它是线程安全的，所有的线程都可以使用它一起发送http请求
-     */
     private static CloseableHttpClient httpClient;
 
     static {

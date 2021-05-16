@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Client {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String serverUrlAndPort = "http://127.0.0.1:8801";
         String responseStr = HttpClientUtils.httpGet(serverUrlAndPort);
         System.out.println(responseStr);
