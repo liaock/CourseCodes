@@ -24,7 +24,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * HttpClient configs
+ * HttpClientUtils
  * Created by liaock on 2021/5/16
  **/
 
@@ -40,7 +40,7 @@ public class HttpClientUtils {
 
     static {
         try {
-            System.out.println("初始化HttpClientTest~~~开始");
+           log.info("------------------------- 初始化HttpClient开始！---------------------");
             SSLContextBuilder builder = new SSLContextBuilder();
             builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
             SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build());
@@ -51,17 +51,10 @@ public class HttpClientUtils {
             poolConnManager.setMaxTotal(640);// 同时最多连接数
             // 设置最大路由
             poolConnManager.setDefaultMaxPerRoute(320);
-            // 此处解释下MaxtTotal和DefaultMaxPerRoute的区别：
-            // 1、MaxtTotal是整个池子的大小；
-            // 2、DefaultMaxPerRoute是根据连接到的主机对MaxTotal的一个细分；比如：
-            // MaxtTotal=400 DefaultMaxPerRoute=200
-            // 而我只连接到http://www.abc.com时，到这个主机的并发最多只有200；而不是400；
-            // 而我连接到http://www.bac.com 和
-            // http://www.ccd.com时，到每个主机的并发最多只有200；即加起来是400（但不能超过400）；所以起作用的设置是DefaultMaxPerRoute
             // 初始化httpClient
             httpClient = getConnection();
 
-            System.out.println("初始化HttpClientTest~~~结束");
+            log.info("------------------------- 初始化HttpClient 完毕 ！---------------------");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (KeyStoreException e) {
