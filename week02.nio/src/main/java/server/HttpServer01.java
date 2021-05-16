@@ -1,7 +1,6 @@
 package server;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -12,10 +11,10 @@ import java.net.Socket;
 public class HttpServer01 {
 
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSockt = new ServerSocket(8801);
+        ServerSocket serverSocket = new ServerSocket(8801);
         RequestHandler requestHandler = new RequestHandler();
         while (true) {
-            Socket socket = serverSockt.accept();
+            Socket socket = serverSocket.accept();
             requestHandler.service(socket);
         }
     }
