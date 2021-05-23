@@ -9,6 +9,12 @@ import java.net.Socket;
  **/
 
 public class RequestHandler {
+
+    private String msg;
+
+    public RequestHandler(String msg){
+        this.msg = msg;
+    }
     /**
      * 请求处理.
      * @param socket
@@ -18,7 +24,7 @@ public class RequestHandler {
             PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
             printWriter.println("HTTP/1.1 200 OK");
             printWriter.println("Content-Type:text/html;charset=utf-8");
-            String body = "hello,nio1";
+            String body = msg;
             printWriter.println("Content-Length:" + body.getBytes().length);
             printWriter.println();
             printWriter.write(body);

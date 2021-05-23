@@ -61,7 +61,7 @@ public class HttpClientUtils {
         }
     }
 
-    private static CloseableHttpClient getConnection() {
+    public static CloseableHttpClient getConnection() {
         RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout(5000)
                 .setConnectionRequestTimeout(5000)

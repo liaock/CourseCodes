@@ -15,8 +15,8 @@ public class HttpServer03 {
 
         // 线程如果处理时间长，FixedThreadPool 可能会因为阻塞队列无限扩张导致OOM.
         ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 2);
-        ServerSocket serverSocket = new ServerSocket(8801);
-        RequestHandler requestHandler = new RequestHandler();
+        ServerSocket serverSocket = new ServerSocket(8803);
+        RequestHandler requestHandler = new RequestHandler("i am server 1 at port 8803");
         while (true) {
             Socket socket = serverSocket.accept();
             executorService.execute(() -> requestHandler.service(socket));
