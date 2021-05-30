@@ -9,8 +9,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>week01.jvm</module>
-        <module>week02.nio</module>
+        <module>01.jvm</module>
+        <module>02.nio</module>
+        <module>03.concurrency</module>
     </modules>
 
     <properties>
@@ -33,10 +34,15 @@
                 <version>${log4j.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-to-slf4j</artifactId>
-                <version>${log4j2slfj.version}</version>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.7.26</version>
             </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.apache.logging.log4j</groupId>-->
+                <!--<artifactId>log4j-to-slf4j</artifactId>-->
+                <!--<version>${log4j2slfj.version}</version>-->
+            <!--</dependency>-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>

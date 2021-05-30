@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>01.jvm</artifactId>
+    <artifactId>03.concurrency</artifactId>
 
 
 </project>
