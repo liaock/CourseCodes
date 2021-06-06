@@ -1,0 +1,4 @@
+#-------starter自动装配---------
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.jiketime.config.JavaConfig,\
+com.jiketime.config.JDBCAutoConfiguration,\
+com.jiketime.config.HikariDataSourceAutoConfiguration  
