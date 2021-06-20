@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiketime.dbdemo.mapper.TOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.jiketime.dbdemo.bean.TOrder" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="pay_method" property="payMethod" jdbcType="BIT" />
+    <result column="shipping_comp_name" property="shippingCompName" jdbcType="VARCHAR" />
+    <result column="shipping_sn" property="shippingSn" jdbcType="VARCHAR" />
+    <result column="shipping_time" property="shippingTime" jdbcType="VARCHAR" />
+    <result column="pay_time" property="payTime" jdbcType="VARCHAR" />
+    <result column="receive_time" property="receiveTime" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insertList" parameterType="java.util.List" >
+    insert into t_order (id,product_id, `status`, pay_method,
+    shipping_comp_name, shipping_sn, shipping_time,
+    pay_time, receive_time, create_time,
+    update_time)
+    values
+    <foreach collection="recordList" separator="," item="item">
+      (#{item.id,jdbcType=VARCHAR},#{item.productId,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.payMethod,jdbcType=BIT},
+      #{item.shippingCompName,jdbcType=VARCHAR}, #{item.shippingSn,jdbcType=VARCHAR}, #{item.shippingTime,jdbcType=VARCHAR},
+      #{item.payTime,jdbcType=VARCHAR}, #{item.receiveTime,jdbcType=VARCHAR}, #{item.createTime,jdbcType=VARCHAR},
+      #{item.updateTime,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+  <insert id="insert" parameterType="com.jiketime.dbdemo.bean.TOrder" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_order (product_id, `status`, pay_method, 
+      shipping_comp_name, shipping_sn, shipping_time, 
+      pay_time, receive_time, create_time, 
+      update_time)
+    values (#{productId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{payMethod,jdbcType=BIT}, 
+      #{shippingCompName,jdbcType=VARCHAR}, #{shippingSn,jdbcType=VARCHAR}, #{shippingTime,jdbcType=VARCHAR}, 
+      #{payTime,jdbcType=VARCHAR}, #{receiveTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jiketime.dbdemo.bean.TOrder" >
+    update t_order
+    set product_id = #{productId,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      pay_method = #{payMethod,jdbcType=BIT},
+      shipping_comp_name = #{shippingCompName,jdbcType=VARCHAR},
+      shipping_sn = #{shippingSn,jdbcType=VARCHAR},
+      shipping_time = #{shippingTime,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=VARCHAR},
+      receive_time = #{receiveTime,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, product_id, `status`, pay_method, shipping_comp_name, shipping_sn, shipping_time, 
+    pay_time, receive_time, create_time, update_time
+    from t_order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, product_id, `status`, pay_method, shipping_comp_name, shipping_sn, shipping_time, 
+    pay_time, receive_time, create_time, update_time
+    from t_order
+  </select>
+</mapper>

@@ -12,7 +12,6 @@
         <module>01.jvm</module>
         <module>02.nio</module>
         <module>03.concurrency</module>
-        <module>05.db</module>
     </modules>
 
     <properties>
