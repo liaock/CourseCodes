@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiketime.shardingsphere.shardingspheredemo.dbpart.mapper.OrderItemMapper" >
+    <resultMap id="orderResultMap" type="com.jiketime.shardingsphere.shardingspheredemo.dbpart.OrderItem" >
+        <id column="item_id" property="orderId" jdbcType="BIGINT" />
+        <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+        <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="DECIMAL" />
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insertList" parameterType="java.util.List" >
+        insert into t_order (id,product_id, `create_name`, price)
+        values
+        <foreach collection="recordList" separator="," item="item">
+            (#{item.id,jdbcType=VARCHAR},#{item.productId,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.payMethod,jdbcType=BIT},
+            #{item.shippingCompName,jdbcType=VARCHAR}, #{item.shippingSn,jdbcType=VARCHAR}, #{item.shippingTime,jdbcType=VARCHAR},
+            #{item.payTime,jdbcType=VARCHAR}, #{item.receiveTime,jdbcType=VARCHAR}, #{item.createTime,jdbcType=VARCHAR},
+            #{item.updateTime,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <insert id="insert" parameterType="com.jiketime.shardingsphere.shardingspheredemo.dbpart.OrderItem" >
+        insert into t_order_item (item_id,order_no, `item_name`, price)
+        values (#{itemId,jdbcType=BIGINT},#{orderNo,jdbcType=VARCHAR}, #{item_name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL})
+    </insert>
+    <select id="selectByPrimaryKey" resultMap="orderResultMap" parameterType="java.lang.String" >
+    select id, product_id, `status`, pay_method, shipping_comp_name, shipping_sn, shipping_time,
+    pay_time, receive_time, create_time, update_time
+    from t_order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+    <select id="selectAll" resultMap="orderResultMap" >
+    select id, product_id, `status`, pay_method, shipping_comp_name, shipping_sn, shipping_time,
+    pay_time, receive_time, create_time, update_time
+    from t_order
+  </select>
+</mapper>
